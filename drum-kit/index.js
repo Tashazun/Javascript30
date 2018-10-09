@@ -34,11 +34,19 @@ document.addEventListener('keydown', e => {
     playSound(stroke);
 });
 
-function playSound(stroke) {
+playSound = stroke => {
     if(stroke === null) return;
     let sound = new Sound(context);
     let value = stroke.dataset.frequency;
     sound.play(value);
     sound.stop();
+    stroke.classList.add('playing');
 }
 
+function removeTransition(e) {
+    if(e.propertyName !== 'transform') return;
+    this.classList.remove('playing');
+}
+
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => key.addEventListener('transitionend', removeTransition));
