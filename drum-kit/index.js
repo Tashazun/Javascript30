@@ -29,16 +29,15 @@ class Sound {
 
 let context = new (window.AudioContext || window.webkitAudioContext)();
 
-    document.addEventListener('keydown', e => {
-        const stroke = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-        console.log(stroke);
-        playSound(stroke);
-    });
+document.addEventListener('keydown', e => {
+    const stroke = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+    playSound(stroke);
+});
 
 function playSound(stroke) {
+    if(stroke === null) return;
     let sound = new Sound(context);
     let value = stroke.dataset.frequency;
-    console.log(value);
     sound.play(value);
     sound.stop();
 }
