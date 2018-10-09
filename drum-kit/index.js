@@ -22,25 +22,23 @@ class Sound {
     }
 
     stop() {
-        this.gainNode.gain.exponentialRampToValueAtTime(0.001, this.contect.currentTime + 1);
+        this.gainNode.gain.exponentialRampToValueAtTime(0.001, this.context.currentTime + 1);
         this.oscillator.stop(this.context.currentTime + 1);
     }
 };
 
 let context = new (window.AudioContext || window.webkitAudioContext)();
 
-const notes = document.querySelectorAll('.key');
-
-notes.forEach((note) => {
-    note.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         const stroke = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        console.log(stroke);
         playSound(stroke);
     });
-});
 
 function playSound(stroke) {
     let sound = new Sound(context);
     let value = stroke.dataset.frequency;
+    console.log(value);
     sound.play(value);
     sound.stop();
 }
