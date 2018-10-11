@@ -44,10 +44,28 @@ const inventors = [
 
   // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
   // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+    // const category = document.querySelector('.mw-category');
+    // const links = Array.from(category.querySelectorAll('a'));
+    // const de = links
+    //             .map(link => link.textContent)
+    //             .filter(streetName => streetName.includes('de'));
 
   // 7. sort Exercise
   // Sort the people alphabetically by last name
+    const nameOrder = people.map(name => name.split(', ').reverse().join());
+    const lastNames = nameOrder.sort();
+    console.log(lastNames);
+
   // 8. Reduce Exercise
   // Sum up the instances of each of these
   const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+  const wordCount = data.reduce((allWords, word) => {
+    if (!allWords[word]) {
+      allWords[word] = 0;
+    }
+      allWords[word]++;
+      return allWords;
+  }, {});
+
+  console.log(wordCount);
